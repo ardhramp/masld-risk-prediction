@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MASLD Risk Prediction</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Header -->
+        <div class="header">
+
+            <h1>MASLD Risk Prediction</h1>
+
+            <p>
+                Machine Learning-Based Early Prediction Using
+                Clinical and Lifestyle Data
+            </p>
+
+        </div>
+
+
+        <!-- Main Card -->
+        <div class="card">
+
+            <!-- Prediction Form -->
+            <form id="predictionForm">
+
+                <h2>Patient Information</h2>
+
+                <div class="form-grid">
+
+
+                    <!-- Age -->
+                    <div class="form-group">
+
+                        <label for="Age">Age</label>
+
+                        <input
+                            type="number"
+                            id="Age"
+                            name="Age"
+                            min="18"
+                            max="100"
+                            step="1"
+                            required>
+
+                    </div>
+
+
+                    <!-- Sex -->
+                    <div class="form-group">
+
+                        <label for="Sex">Sex</label>
+
+                        <select
+                            id="Sex"
+                            name="Sex"
+                            required>
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="1">
+                                Male
+                            </option>
+
+                            <option value="2">
+                                Female
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- BMI -->
+                    <div class="form-group">
+
+                        <label for="BMI">
+                            BMI (kg/m²)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="BMI"
+                            name="BMI"
+                            min="10"
+                            max="80"
+                            step="0.1"
+                            required>
+
+                    </div>
+
+
+                    <!-- Waist -->
+                    <div class="form-group">
+
+                        <label for="Waist">
+                            Waist Circumference (cm)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="Waist"
+                            name="Waist"
+                            min="30"
+                            max="200"
+                            step="0.1"
+                            required>
+
+                    </div>
+
+
+                    <!-- Systolic BP -->
+                    <div class="form-group">
+
+                        <label for="Systolic_BP">
+                            Systolic BP (mmHg)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="Systolic_BP"
+                            name="Systolic_BP"
+                            min="50"
+                            max="250"
+                            step="1"
+                            required>
+
+                    </div>
+
+
+                    <!-- Diastolic BP -->
+                    <div class="form-group">
+
+                        <label for="Diastolic_BP">
+                            Diastolic BP (mmHg)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="Diastolic_BP"
+                            name="Diastolic_BP"
+                            min="30"
+                            max="150"
+                            step="1"
+                            required>
+
+                    </div>
+
+
+                    <!-- Glucose -->
+                    <div class="form-group">
+
+                        <label for="Glucose">
+                            Glucose (mg/dL)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="Glucose"
+                            name="Glucose"
+                            min="40"
+                            max="500"
+                            step="0.1"
+                            placeholder="Optional">
+
+                    </div>
+
+
+                    <!-- HDL -->
+                    <div class="form-group">
+
+                        <label for="HDL">
+                            HDL (mg/dL)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="HDL"
+                            name="HDL"
+                            min="10"
+                            max="150"
+                            step="0.1"
+                            placeholder="Optional">
+
+                    </div>
+
+
+                    <!-- Total Cholesterol -->
+                    <div class="form-group">
+
+                        <label for="Total_Cholesterol">
+                            Total Cholesterol (mg/dL)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="Total_Cholesterol"
+                            name="Total_Cholesterol"
+                            min="50"
+                            max="500"
+                            step="0.1"
+                            placeholder="Optional">
+
+                    </div>
+
+
+                    <!-- Triglycerides -->
+                    <div class="form-group">
+
+                        <label for="Triglycerides">
+                            Triglycerides (mg/dL)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="Triglycerides"
+                            name="Triglycerides"
+                            min="20"
+                            max="1000"
+                            step="0.1"
+                            placeholder="Optional">
+
+                    </div>
+
+
+                    <!-- Sedentary Time -->
+                    <div class="form-group">
+
+                        <label for="Sedentary_Minutes">
+                            Sedentary Time (minutes/day)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="Sedentary_Minutes"
+                            name="Sedentary_Minutes"
+                            min="0"
+                            max="1440"
+                            step="1"
+                            required>
+
+                    </div>
+
+
+                    <!-- Alcohol -->
+                    <div class="form-group">
+
+                        <label for="Alcohol_Ever">
+                            Ever Consumed Alcohol?
+                        </label>
+
+                        <select
+                            id="Alcohol_Ever"
+                            name="Alcohol_Ever"
+                            required>
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="1">
+                                Yes
+                            </option>
+
+                            <option value="0">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Buttons -->
+                <div class="button-group">
+
+                    <button
+                        type="submit"
+                        id="predictButton">
+
+                        Predict MASLD Risk
+
+                    </button>
+
+                    <button
+                        type="button"
+                        id="resetButton">
+
+                        Reset
+
+                    </button>
+
+                </div>
+
+            </form>
+
+
+            <!-- Prediction Result -->
+            <div
+                id="result"
+                class="result"
+                style="display: none;">
+
+                <h2>Prediction Result</h2>
+
+                <div
+                    id="prediction"
+                    class="risk">
+                </div>
+
+                <p>
+                    Predicted probability of high risk:
+                    <strong id="probability"></strong>
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- How It Works -->
+        <div class="info-section">
+
+            <h2>How the System Works</h2>
+
+            <p>
+                The application collects clinical and lifestyle
+                information and sends the data to a Flask-based
+                prediction API.
+            </p>
+
+            <p>
+                The trained Logistic Regression model processes
+                the input and returns the predicted MASLD risk
+                as a JSON response.
+            </p>
+
+        </div>
+
+
+        <!-- Disclaimer -->
+        <div class="disclaimer">
+
+            <strong>Disclaimer:</strong>
+
+            This application is an educational
+            machine-learning prototype and is not a
+            medical diagnostic tool.
+
+        </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- JavaScript -->
+    <script>
+
+        // Get form elements
+        const form =
+            document.getElementById("predictionForm");
+
+        const resultBox =
+            document.getElementById("result");
+
+        const predictionText =
+            document.getElementById("prediction");
+
+        const probabilityText =
+            document.getElementById("probability");
+
+        const resetButton =
+            document.getElementById("resetButton");
+
+
+        // Form submission event
+        form.addEventListener(
+            "submit",
+            async function(event) {
+
+                // Prevent normal form submission
+                event.preventDefault();
+
+
+                // Collect form data
+                const formData =
+                    new FormData(form);
+
+
+                // Convert form data to JSON object
+                const data = {
+
+                    Age:
+                        Number(
+                            formData.get("Age")
+                        ),
+
+                    Sex:
+                        Number(
+                            formData.get("Sex")
+                        ),
+
+                    BMI:
+                        Number(
+                            formData.get("BMI")
+                        ),
+
+                    Waist:
+                        Number(
+                            formData.get("Waist")
+                        ),
+
+                    Systolic_BP:
+                        Number(
+                            formData.get("Systolic_BP")
+                        ),
+
+                    Diastolic_BP:
+                        Number(
+                            formData.get("Diastolic_BP")
+                        ),
+
+                    Glucose:
+                        formData.get("Glucose")
+                            ? Number(
+                                formData.get("Glucose")
+                              )
+                            : null,
+
+                    HDL:
+                        formData.get("HDL")
+                            ? Number(
+                                formData.get("HDL")
+                              )
+                            : null,
+
+                    Total_Cholesterol:
+                        formData.get(
+                            "Total_Cholesterol"
+                        )
+                            ? Number(
+                                formData.get(
+                                    "Total_Cholesterol"
+                                )
+                              )
+                            : null,
+
+                    Triglycerides:
+                        formData.get(
+                            "Triglycerides"
+                        )
+                            ? Number(
+                                formData.get(
+                                    "Triglycerides"
+                                )
+                              )
+                            : null,
+
+                    Sedentary_Minutes:
+                        Number(
+                            formData.get(
+                                "Sedentary_Minutes"
+                            )
+                        ),
+
+                    Alcohol_Ever:
+                        Number(
+                            formData.get(
+                                "Alcohol_Ever"
+                            )
+                        )
+
+                };
+
+
+                try {
+
+                    // Send JSON to Flask API
+                    const response =
+                        await fetch(
+                            "/predict",
+                            {
+
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body:
+                                    JSON.stringify(
+                                        data
+                                    )
+
+                            }
+                        );
+
+
+                    // Convert response to JSON
+                    const result =
+                        await response.json();
+
+
+                    // Successful prediction
+                    if (result.success) {
+
+                        $("#prediction").text(result.prediction);
+
+                        $("#probability").text(result.probability + "%");
+
+                        $("#result")
+                        .hide()
+                        .fadeIn(600);
+                    }
+
+
+                    // Prediction error
+                    else {
+
+                        alert(
+                            "Prediction error: " +
+                            result.error
+                        );
+
+                    }
+
+                }
+
+
+                // Server connection error
+                catch (error) {
+
+                    alert(
+                        "Unable to connect to the server."
+                    );
+
+                    console.error(error);
+
+                }
+
+            }
+        );
+
+
+        // Reset button
+        resetButton.addEventListener(
+    "click",
+    function() {
+
+        form.reset();
+
+        $("#result").fadeOut(300);
+
+        $("#prediction").text("");
+
+        $("#probability").text("");
+
+    }
+);
+
+    </script>
+
+</body>
+
+</html>
